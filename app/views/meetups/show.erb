@@ -1,5 +1,7 @@
 <h1>Meetups</h1>
 
-  <h3><%= @meetup.title %></h3>
-  <p><%= @meetup.details %></p>
-  <p>[<%= @meetup.tags %>]</p>
+  <% @meetup.each do |t| %>
+    <h3><%= t.title %></h3>
+  <p><%= t.details %></p>
+  <p>[<%= t.tags %>]</p>
+  <% end %>

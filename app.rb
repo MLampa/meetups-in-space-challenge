@@ -34,8 +34,7 @@ get '/meetups' do
   erb :'meetups/index'
 end
 
-get '/meetups/:title' do
-  @meetup = Meetup.where(title: params[:title])
-  binding.pry
+get '/meetups/:id' do
+  @meetup = Meetup.where(id: params[:id])
   erb :'meetups/show'
 end

@@ -1,7 +1,7 @@
 <h1>Meetups</h1>
 
 <% @meetups.each do |meetup| %>
-  <h3><a href="/meetups/<%= meetup.title %>"><%= meetup.title %></h3></a>
+  <h3><a href="/meetups/<%= meetup.id %>"><%= meetup.title %></h3></a>
   <p><%= meetup.details %></p>
   <p>[<%= meetup.tags %>]</p>
 <% end %>

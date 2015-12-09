@@ -1,5 +1,5 @@
 //JAVASCRIPT CODE GOES HERE
-  $("form").on("submit", function(event){
+  $("#create_meetup_form").on("submit", function(event){
     event.preventDefault();
 
     var title_boolean = false;
@@ -41,13 +41,31 @@ var filled = function(input) {
 }
 
 var submitMeetupsViaAjax = function(title, details, tags) {
+  debugger;
   var request = $.ajax({
     method: "POST",
     url: "/meetups",
     data: { title: title, details: details, tags: tags }
   });
   request.done(function(responseData) {
-    debugger;
     $(".meetups").append("<h3>" + title + "</h3><p>" + details + "</p><p>" + tags + "</p>");
   });
 };
+
+$("#join_meetup_form").on("submit", function(event){
+  event.preventDefault();
+  meetup_id = $("#join_meetup_form").attr('meetup_id');
+  submitJoinMeetupViaAjax(meetup_id);
+
+});
+
+var submitJoinMeetupViaAjax = function(meetup_id) {
+  var request = $.ajax({
+    method: "POST",
+    url: '/meetups_join.json',
+    data: { meetup_id: meetup_id }
+  });
+  request.done(function(responseData) {
+    alert("You have successfully joined this meetup.");
+  });
+}

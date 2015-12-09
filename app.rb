@@ -37,6 +37,7 @@ end
 
 get '/meetups/:id' do
   @meetup = Meetup.where(id: params[:id])[0]
+  @members = @meetup.users
   erb :'meetups/show'
 end
 
@@ -48,4 +49,18 @@ post '/meetups' do
   Meetup.create(title: title, details: details, tags: tags)
 
   redirect '/meetups'
+end
+
+post '/meetups/:id' do
+  # Membership.create(meetup_id: meetup_id, user_id: user_id )
+  erb :'meetups/show'
+end
+
+post '/meetups_join.json' do
+  binding.pry
+  content_type :json
+  @meetup = Meetup.find(params[:meetup_id])
+  @user = User.find(session[:user_id])
+  @meetup.users << @user
+  { user_id: @user.id }.to_json
 end

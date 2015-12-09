@@ -2,6 +2,7 @@ require 'sinatra'
 require_relative 'config/application'
 require 'faker'
 require 'pry'
+require 'json'
 
 helpers do
   def current_user
@@ -35,6 +36,16 @@ get '/meetups' do
 end
 
 get '/meetups/:id' do
-  @meetup = Meetup.where(id: params[:id])
+  @meetup = Meetup.where(id: params[:id])[0]
   erb :'meetups/show'
+end
+
+post '/meetups' do
+  title = params[:title]
+  details = params[:details]
+  tags = params[:tags]
+
+  Meetup.create(title: title, details: details, tags: tags)
+
+  redirect '/meetups'
 end

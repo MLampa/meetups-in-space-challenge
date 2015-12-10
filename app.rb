@@ -57,7 +57,6 @@ post '/meetups/:id' do
 end
 
 post '/meetups_join.json' do
-  binding.pry
   content_type :json
   @meetup = Meetup.find(params[:meetup_id])
   @user = User.find(session[:user_id])
